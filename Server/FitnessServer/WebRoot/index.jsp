@@ -17,9 +17,9 @@
 <body>
 <%
     //student为数据库名字，加上useSSL=true不然报错
-    String url="jdbc:mysql://localhost:3306/fitness_mysql?useSSL=true";
+    String url="jdbc:mysql://localhost:3306/fitness_mysql";
     String useName="root";
-    String password="1234";
+    String password="123456";
     Connection conn=null;
     try{
         Class.forName("com.mysql.jdbc.Driver");

@@ -1,4 +1,4 @@
-### 基于Android的健身信息管理系统
+## 基于Android的健身信息管理系统
 
 本系统使用Tomcat作为服务器，数据库采用MySQL。
 
@@ -10,33 +10,14 @@ Tomcat作为Servlet容器	JDBC连接MySQL
 
 输入账号密码后，进入对应用户类型的主界面
 
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/3.png)
+### 一些碎碎念
 
-Mysql数据库无法直接存储图片，所以数据库中存储的为图片索引地址
+为了偷懒我确实想用原仓库直接上的，但是后来发现原仓库的代码有些逻辑实在我看的不是很下去
 
+所以就有了这个Fork
 
+大部分使用方法都和原仓库差不多 主要是删掉了打卡以及评论那些
 
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/4.png)
+然后不要用JDK1.8了 求求了这都2023年了怎么还在用JDK1.8搞开发 少说用个JDK11吧
 
-
-
-向左侧滑动出现右侧菜单的功能与QQ相似
-
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/1.png)
-
-打过卡后日期会有一个红色的圆圈
-
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/5.png)
-
-
-
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/2.png)
-
-
-
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/0.png)
-
-
-
-![](https://github.com/aaachao/fitness-manager-android-app/blob/master/MyApplication/IMG/6.png)
-
+服务器端实在是改不动了 有大佬接着用又想改的话自便吧 呜呜 上个大学真不容易

@@ -196,78 +196,18 @@ public class CourseServlet extends BaseMobileServlet {
     }
 	public String add(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
-        DiskFileItemFactory factory = new DiskFileItemFactory();
+        Course a = packageEntity(request);
 
-        // 2.创建文件上传核心类
-        ServletFileUpload upload = new ServletFileUpload(factory);
-
-        // 【设置单文件最大值：5M】
-        upload.setFileSizeMax(5 * 1024 * 1024);
-
-        // 【设置总文件最大值： 20M】
-        upload.setSizeMax(20 * 1024 * 1024);
-
-        upload.setHeaderEncoding("utf-8");
-
-        Course course=new Course();
-        try {
-            // 4.遍历表单项
-            @SuppressWarnings("unchecked")
-            List<FileItem> list = upload.parseRequest(request);
-            for (FileItem item : list) {
-                // 普通表单项
-                if (item.isFormField()) {
-                    String name = item.getFieldName();
-                    String value = item.getString("UTF-8");
-                    if (name.equals("mingcheng")) {
-                        course.setCoursename(value);
-                    } else if (name.equals("kaluli")) {
-                        course.setCalories(Integer.parseInt(value));
-                    } else if (name.equals("neirong")) {
-                        course.setCoursedata(value);
-                    }
-                    System.out.println(name + " : " + value);
-                } else {// 文件表单项
-                    // 文件名
-                    String fileName = item.getName();
-                    // 生成唯一文件名
-                    fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
-                    course.setImage(fileName);
-                    // 获取上传路径：项目目录下的upload文件夹(先创建upload文件夹)
-                    String basePath = "C:\\Users\\C\\Desktop\\file";
-
-                    // 创建文件对象
-                    File file = new File(basePath, fileName);
-
-                    // 写文件（保存）
-                    item.write(file);
-
-                    // 删除临时文件
-                    item.delete();
-                }
-            }
+        Gson gson = new Gson();
+        String json = "";
+        if(courseDao.isExist(a.getCoursename()))
+        {
+            json = "该项目已存在";
         }
-        catch (FileUploadException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        else {
+            courseDao.add(a);
+            json = gson.toJson(a);
         }
-		Course a = course;
-		//User b=userDao.exist(a.getCourseteach());
-
-
-		Gson gson = new Gson();
-		String json = "";
-		if (courseDao.isExist(a.getCoursename())) {
-			json = "该项目已经存在";
-
-		}
-		else {
-			courseDao.add(a);
-			json = gson.toJson(a);
-		}
-
-
         return json;
 	}
 
@@ -480,7 +420,7 @@ public class CourseServlet extends BaseMobileServlet {
     public String sikelist(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String coachId = request.getParameter("coachId");
-        List<Course> newsList = courseDao.getsikeList(coachId,100);
+        List<Course> newsList = courseDao.getsikeList(coachId);
         Gson gson = new Gson();
         String json = gson.toJson(newsList);
         return json;
@@ -491,15 +431,11 @@ public class CourseServlet extends BaseMobileServlet {
 		String coursename = request.getParameter("mingcheng");
 		String courseteach = request.getParameter("jiaolian");
 		String coursedata= request.getParameter("neirong");
-        String kalulia= request.getParameter("kaluli");
-        int kaluli=0;
-        kaluli=Integer.parseInt(kalulia);
 		Course a = new Course();
 		a.setCoursename(coursename);
 		a.setCourseteach(courseteach);
 		a.setCoursedata(coursedata);
 		a.setoldCoursename(oldcoursename);
-		a.setCalories(kaluli);
 		return a;
 	}
     private Course packageEntity2(HttpServletRequest request) {

@@ -3,11 +3,13 @@ package com.app.dao;
 import com.app.entity.Course;
 import com.app.utils.JdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao {
@@ -18,10 +20,10 @@ public class CourseDao {
 	private QueryRunner queryRunner = JdbcUtils.getQueryRunnner();
 
 	public Course found(String courseName) {
-		sql = "SELECT * FROM course WHERE courseName = ? AND status = ?";
+		sql = "SELECT * FROM course WHERE courseName = ?";
 		try {
 
-            Course a=queryRunner.query(sql, new BeanHandler<Course>(Course.class), courseName,0);
+            Course a=queryRunner.query(sql, new BeanHandler<Course>(Course.class), courseName);
 
 			return a;
 		} catch (SQLException e) {
@@ -79,9 +81,9 @@ public class CourseDao {
         }
     }
 	public boolean add(Course a) {
-		sql = "INSERT INTO course ( courseName, coursedata,image,calories) VALUES ( ?, ?, ?,?);";
+		sql = "INSERT INTO course ( courseName, coursedata) VALUES ( ?, ?);";
 		try {
-            return queryRunner.update(sql, a.getCoursename(), a.getCoursedata() ,a.getImage(),a.getCalories())>0;
+            return queryRunner.update(sql, a.getCoursename(), a.getCoursedata())>0;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -152,17 +154,23 @@ public class CourseDao {
     }
 
     public List<Course> getNewsList(int rows) {
-        sql = "SELECT * FROM course WHERE status = ? ORDER BY courseId DESC LIMIT 0, ?;";
+        sql = "SELECT * FROM course ORDER BY courseId DESC LIMIT 0, ?;";
         try {
-            return queryRunner.query(sql, new BeanListHandler<Course>(Course.class), 0,rows);
+            return queryRunner.query(sql, new BeanListHandler<Course>(Course.class),rows);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-	public List<Course> getsikeList(String coachId,int rows) {
-		sql = "SELECT * FROM course WHERE coachId = ? AND status = ? ORDER BY courseId DESC LIMIT 0, ?;";
+	public List<Course> getsikeList(String coachId) {
+		sql = "SELECT fitnessId FROM coachfitness WHERE coachId = ?;";
 		try {
-			return queryRunner.query(sql, new BeanListHandler<Course>(Course.class), coachId,1,rows);
+            String sql_search = "SELECT * FROM course WHERE courseId = ?;";
+            List<Object[]> list = queryRunner.query(sql, new ArrayListHandler() , coachId);
+            List<Course> listcourse = new ArrayList<>();
+            for(Object[] courseId : list){
+                listcourse.add(queryRunner.query(sql_search, new BeanHandler<>(Course.class), courseId));
+            }
+            return listcourse;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

@@ -85,38 +85,37 @@ public class DependServlet extends BaseMobileServlet {
         Depend a = packageEntity2(request);
         Gson gson = new Gson();
         List<Course> newsList = courseDao.getmyList(a.getUserId());
-        for(int i=0;i<newsList.size();i++)
-        {
-            Depend c=dependDao.found(a.getUserId(),newsList.get(i).getCourseId());
-            User b=userDao.found2(c.getCoachId());
-            if(b!=null)
-            {
-                newsList.get(i).setTeachername(b.getName());
-                newsList.get(i).setCourseteach(b.getUserId()+"");
+        for (Course course : newsList) {
+            Depend c = dependDao.found(a.getUserId(), course.getCourseId());
+            User b = userDao.found2(c.getCoachId());
+            if (b != null) {
+                course.setTeachername(b.getName());
+                course.setCourseteach(b.getUserId() + "");
             }
-
         }
-        String json = gson.toJson(newsList);
-        return json;
+        return gson.toJson(newsList);
     }
     public String mydepend2(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Depend a = packageEntity2(request);
         Gson gson = new Gson();
         List<Course> newsList = courseDao.getmyList22(a.getUserId());
-        for(int i=0;i<newsList.size();i++)
-        {
-            Depend c=dependDao.found(a.getUserId(),newsList.get(i).getCourseId());
-            User b=userDao.found2(c.getCoachId());
-            if(b!=null)
-            {
-                newsList.get(i).setTeachername(b.getName());
-                newsList.get(i).setCourseteach(b.getUserId()+"");
+        for (Course course : newsList) {
+            Depend c = dependDao.found(a.getUserId(), course.getCourseId());
+            User b = userDao.found2(c.getCoachId());
+            if (b != null) {
+                course.setTeachername(b.getName());
+                course.setCourseteach(b.getUserId() + "");
             }
-
         }
-        String json = gson.toJson(newsList);
-        return json;
+        return gson.toJson(newsList);
+    }
+    public String findMyCoach(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Depend a = packageEntity2(request);
+        Gson gson = new Gson();
+        List<User> newsList = userDao.foundMyCoach(a.getUserId()+"");
+        return gson.toJson(newsList);
     }
     public String coursedepend(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

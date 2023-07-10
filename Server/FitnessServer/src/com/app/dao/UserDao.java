@@ -1,12 +1,10 @@
 package com.app.dao;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.handlers.*;
 
 import com.app.entity.User;
 import com.app.utils.JdbcUtils;
@@ -31,8 +29,6 @@ public class UserDao {
 		sql = "SELECT role FROM `user` WHERE username = ? AND `password` = ?";
 		try {
 		    User role=queryRunner.query(sql, new BeanHandler<User>(User.class),username,password);
-            //System.out.println("SQLSQLqwertyuiop哇哇哇哇哇哇哇哇哇哇"+sql);
-            //System.out.println("ROLEROLEqwertyuiop哇哇哇哇哇哇哇哇哇哇"+role);
 			return role;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -61,7 +57,6 @@ public class UserDao {
 	public User found(String username) {
 		sql = "SELECT * FROM user WHERE userName = ?";
 		try {
-
 			User a=queryRunner.query(sql, new BeanHandler<User>(User.class), username);
 			return a;
 		} catch (SQLException e) {
@@ -71,9 +66,7 @@ public class UserDao {
 	public User found2(int id) {
 		sql = "SELECT * FROM user WHERE userId = ?";
 		try {
-
 			User a=queryRunner.query(sql, new BeanHandler<User>(User.class), id);
-
 			return a;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -86,6 +79,22 @@ public class UserDao {
 			User a=queryRunner.query(sql, new BeanHandler<User>(User.class), id);
 
 			return a;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public List<User> foundMyCoach(String id) {
+		sql = "SELECT coachId FROM Depend WHERE userId = ?";
+		try {
+			HashSet<Object> a = new HashSet<>(queryRunner.query(sql, new ColumnListHandler<>(), id));
+			String sql_nextquery = "SELECT * FROM user WHERE userId = ?";
+			List<User> list = new ArrayList<>();
+			for(Object coachId : a){
+				if(!Objects.equals(null,coachId)){
+					list.add(queryRunner.query(sql_nextquery,new BeanHandler<>(User.class), coachId));
+				}
+			}
+			return list;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -153,9 +162,9 @@ public class UserDao {
 		}
 	}
 	public List<User> getNewsList(int rows) {
-		sql = "SELECT * FROM user ORDER BY userId DESC LIMIT 0, ?;";
+		sql = "SELECT * FROM user;";
 		try {
-			return queryRunner.query(sql, new BeanListHandler<User>(User.class), rows);
+			return queryRunner.query(sql, new BeanListHandler<User>(User.class));
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -197,15 +206,6 @@ public class UserDao {
 			throw new RuntimeException(e);
 		}
 	}
-//	public List<User> getuserList(int courseId) {
-//		//System.out.println("courseId="+courseId);
-//		sql = "SELECT c.userId, username, password, sex, height, weight, role,registerTime, status FROM user c,depend b WHERE b.userId=c.userId AND b.courseId = ? AND c.role=? ORDER BY userID ;";
-//		try {
-//			return queryRunner.query(sql, new BeanListHandler<User>(User.class), courseId,"user");
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
 	public List<User> getNewsList2(int rows) {
 		sql = "SELECT * FROM user WHERE role=? ORDER BY userId DESC LIMIT 0, ?;";
 		try {

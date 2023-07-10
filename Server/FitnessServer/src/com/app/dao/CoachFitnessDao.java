@@ -25,9 +25,9 @@ public class CoachFitnessDao {
 		}
 	}
 	public boolean add(CoachFitness a) {
-		sql = "INSERT INTO coachfitness ( ID, coachId, fitnessId) VALUES ( ?, ?, ?);";
+		sql = "INSERT INTO coachfitness (coachId, fitnessId) VALUES ( ?, ?);";
 		try {
-			return queryRunner.update(sql, a.getId(), a.getCoachId(), a.getFitnessId() )>0;
+			return queryRunner.update(sql, a.getCoachId(), a.getFitnessId() )>0;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -41,7 +41,7 @@ public class CoachFitnessDao {
 		}
 	}
 	public boolean delete(int a,int b) {
-		sql = "DELETE  FROM coachfitness WHERE coachId = ? AND fitnessId=?";
+		sql = "DELETE FROM coachfitness WHERE coachId = ? AND fitnessId=?";
 		try {
 			return queryRunner.update(sql,a,b) > 0;
 		} catch (SQLException e) {
