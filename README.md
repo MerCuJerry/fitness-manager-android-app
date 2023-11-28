@@ -1,10 +1,9 @@
 ## 基于Android的健身信息管理系统
 
-本系统使用Tomcat作为服务器，数据库采用MySQL。
+本系统使用Rust-Rocket作为服务器，数据库采用MySQL。
 
-Tomcat作为Servlet容器	JDBC连接MySQL
-
-
+[服务器](https://github.com/MerCuJerry/gymcenter-server)
+[客户端](https://github.com/MerCuJerry/gymcenter-client-android)
 
 三种用户类型：管理员、教练、会员
 
@@ -20,4 +19,4 @@ Tomcat作为Servlet容器	JDBC连接MySQL
 
 然后不要用JDK1.8了 求求了这都2023年了怎么还在用JDK1.8搞开发 少说用个JDK11吧
 
-服务器端实在是改不动了 有大佬接着用又想改的话自便吧 呜呜 上个大学真不容易
+没想到自己最后还是改了这个服务端（（（

@@ -1,0 +1,6 @@
+[submodule "gymcenter-server"]
+	path = gymcenter-server
+	url = https://github.com/MerCuJerry/gymcenter-server.git
+[submodule "gymcenter-client-android"]
+	path = gymcenter-client-android
+	url = https://github.com/MerCuJerry/gymcenter-client-android.git
