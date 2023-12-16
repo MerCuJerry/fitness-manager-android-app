@@ -11,7 +11,7 @@
  Target Server Version : 80200 (8.2.0)
  File Encoding         : 65001
 
- Date: 27/11/2023 20:06:27
+ Date: 16/12/2023 11:33:28
 */
 
 SET NAMES utf8mb4;
@@ -89,33 +89,33 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `password` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `phone_num` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `permission` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'user',
-  `self_sign` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `phone_num` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `permission` varchar(6) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'user',
+  `self_sign` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '123', '123', '13212341234', 'user', '坚持健身');
-INSERT INTO `user` VALUES (2, 'a1', '123', '13112283210', 'user', '坚持健身');
-INSERT INTO `user` VALUES (3, 'qw1', '123', '13918567432', 'user', '坚持健身');
-INSERT INTO `user` VALUES (4, 'admin', '123', '13293710820', 'admin', '坚持健身');
-INSERT INTO `user` VALUES (5, '12345', '123', '13497976135', 'user', '坚持健身');
-INSERT INTO `user` VALUES (6, '2', '123', '13451330841', 'user', '坚持健身');
-INSERT INTO `user` VALUES (7, '3', '123', '13516321509', 'user', '坚持健身');
-INSERT INTO `user` VALUES (8, 'd', '123', '13900310141', 'user', '坚持健身');
-INSERT INTO `user` VALUES (10, '2015', '123', '15235169715', 'admin', '坚持健身');
-INSERT INTO `user` VALUES (11, '134', '123', '13731250991', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (12, '333', '123', '15731344631', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (14, '151', '123', '15183151312', 'user', '坚持健身');
-INSERT INTO `user` VALUES (15, '1234567', '123', '13215928731', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (16, '1647', '123', '15123876453', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (17, '197', '123', '13412415197', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (18, '111', '123', '13832156312', 'coach', '坚持健身');
-INSERT INTO `user` VALUES (19, 'aaa', '123', '13512358123', 'user', '努力');
-INSERT INTO `user` VALUES (20, '14', '123', '15672332156', 'user', '坚持健身');
+INSERT INTO `user` VALUES (1, '123', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13212341234', 'user', '坚持健身');
+INSERT INTO `user` VALUES (2, 'a1', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13112283210', 'user', '坚持健身');
+INSERT INTO `user` VALUES (3, 'qw1', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13918567432', 'user', '坚持健身');
+INSERT INTO `user` VALUES (4, 'admin', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13293710820', 'admin', '坚持健身');
+INSERT INTO `user` VALUES (5, '12345', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13497976135', 'user', '坚持健身');
+INSERT INTO `user` VALUES (6, '2', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13451330841', 'user', '坚持健身');
+INSERT INTO `user` VALUES (7, '3', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13516321509', 'user', '坚持健身');
+INSERT INTO `user` VALUES (8, 'd', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13900310141', 'user', '坚持健身');
+INSERT INTO `user` VALUES (10, '2015', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '15235169715', 'admin', '坚持健身');
+INSERT INTO `user` VALUES (11, '134', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13731250991', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (12, '333', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '15731344631', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (14, '151', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '15183151312', 'user', '坚持健身');
+INSERT INTO `user` VALUES (15, '1234567', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13215928731', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (16, '1647', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '15123876453', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (17, '197', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13412415197', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (18, '111', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13832156312', 'coach', '坚持健身');
+INSERT INTO `user` VALUES (19, 'aaa', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '13512358123', 'user', '努力');
+INSERT INTO `user` VALUES (20, '14', 'pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=', '15672332156', 'user', '坚持健身');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,6 +1,6 @@
 ## 基于Android的健身信息管理系统
 
-本系统使用Rust-Rocket作为服务器，数据库采用MySQL。
+本系统使用Rust-Rocket作为服务器，数据库采用MySQL 8.2.0。
 
 [服务器](https://github.com/MerCuJerry/gymcenter-server)
 [客户端](https://github.com/MerCuJerry/gymcenter-client-android)
